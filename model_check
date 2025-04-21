@@ -1,0 +1,71 @@
+### **1. mT5-Base**
+- **Size:** 580M  
+- **Bulgarian Support:** ✅ Native (mC4)  
+- **Instruction Tuning:** ❌ No  
+- **Tokenizer:** MT5Tokenizer  
+- **Colab Fit (A100):** ✅ Excellent  
+- **Verdict:** ✅ Good for multilingual, but less strict on instructions  
+
+---
+
+### **2. FLAN-T5-Base**
+- **Size:** 250M  
+- **Bulgarian Support:** ⚠️ Poor (mostly EN)  
+- **Instruction Tuning:** ✅ Yes  
+- **Tokenizer:** T5Tokenizer (trained on EN)  
+- **Colab Fit (A100):** ✅ Fast, light  
+- **Verdict:** ❌ Lacks Bulgarian subwords, weak tokenization  
+
+---
+
+### **3. FLAN-T5-Large**
+- **Size:** 770M  
+- **Bulgarian Support:** ⚠️ Limited  
+- **Instruction Tuning:** ✅ Yes  
+- **Tokenizer:** T5Tokenizer  
+- **Colab Fit (A100):** ✅ Manageable  
+- **Verdict:** ❌ Still not ideal for BG text  
+
+---
+
+### **4. FLAN-T5-XXL**
+- **Size:** 11B  
+- **Bulgarian Support:** ❌ EN-only  
+- **Instruction Tuning:** ✅ State-of-the-art  
+- **Tokenizer:** T5Tokenizer  
+- **Colab Fit (A100):** ❌ Won’t fit  
+- **Verdict:** ❌ Too big, not multilingual  
+
+---
+
+### **5. mT5-Large**
+- **Size:** 1.2B  
+- **Bulgarian Support:** ✅✅ Native  
+- **Instruction Tuning:** ❌ No  
+- **Tokenizer:** MT5Tokenizer  
+- **Colab Fit (A100):** ⚠️ Pushing limits  
+- **Verdict:** ✅ Best multilingual instruction-free option  
+
+---
+
+### **6. mT5-XL**
+- **Size:** 3.7B  
+- **Bulgarian Support:** ✅✅✅ Strong  
+- **Instruction Tuning:** ❌ No  
+- **Tokenizer:** MT5Tokenizer  
+- **Colab Fit (A100):** ⚠️ High memory  
+- **Verdict:** ⚠️ Only for inference or offloaded training  
+
+---
+
+### **7. google/flan-t5-xl-multilingual**
+- **Size:** ~3B  
+- **Bulgarian Support:** ✅✅ (incl. Bulgarian)  
+- **Instruction Tuning:** ✅✅✅ Yes  
+- **Tokenizer:** T5Tokenizer  
+- **Colab Fit (A100):** ⚠️ Heavy on A100  
+- **Verdict:** ✅💡 *Ideal*, if it exists and fits  
+
+---
+
+Let me know if you want this as a markdown table or `.csv` file too.
