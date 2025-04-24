@@ -113,3 +113,20 @@ You are an AI assistant specializing in structuring Bulgarian financial data int
 - Consider formal fine-tuning with SFT dataset (1000+ examples)
 - Merge this `.md` into your GitHub repo under `rag-pipeline/instructions/`
 
+--- Beginning phase 1 --- 
+
+🗂️ Current Task
+
+Inject this algorithmic instruction into the 1000 symbolic hierarchy training units for Phase 1 fine-tuning.
+
+Output Format:
+
+Each training pair will be structured as:
+
+{
+  "instruction": "[Instruction above]",
+  "input": "ID | Label | Value1 | Value2\n...",
+  "output": "Активи\n├── ..."
+}
+
+✅ Once injection is done, we'll proceed to JSONL conversion and training setup on Colab with NLLB-Distilled.
