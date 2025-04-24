@@ -1,0 +1,115 @@
+# 🧠 Instruction-Based Prompting for Bulgarian Financial Hierarchy RAG
+
+## 📄 Source Reference
+- **Survey Paper**: [Instruction Tuning for Large Language Models: A Survey (arXiv:2308.10792v8)](https://arxiv.org/abs/2308.10792)
+- **Internal Document**: `llama3_instruction_based_rag.md`
+
+## 🔍 Overview
+Instruction-based prompting, also known as instruction tuning (IT), is a supervised fine-tuning strategy where a language model is trained to follow structured (INSTRUCTION, OUTPUT) pairs. This bridges the gap between next-token prediction and human intent.
+
+In the case of Bulgarian financial hierarchy generation via a RAG pipeline using LLaMA 3, instruction-based prompting significantly improves output quality, adherence to format, and control over hallucination.
+
+---
+
+## ✅ Benefits of Instruction-Based Prompting
+
+| Aspect | Benefit |
+|--------|---------|
+| **Structure Adherence** | Models generate precise symbolic hierarchies with ├──, └──, etc. |
+| **Value Preservation** | Floats like `63.5` are not altered; `NA` is preserved as-is |
+| **Hallucination Prevention** | Model is restricted to only what's present in input |
+| **Generalization** | With diverse examples, models adapt to varied financial formats |
+
+---
+
+## 📘 Strategy From Research
+### Paper Highlights (arXiv:2308.10792v8)
+- Instruction tuning improves controllability and alignment
+- Step-by-step instructions help LLMs follow tasks more consistently
+- Instruction format should include:
+  - Natural language instruction
+  - Input field (optional)
+  - Output field (target response)
+- Self-instruct and distillation (e.g., Alpaca, WizardLM) improve scale and quality
+
+---
+
+## 🧱 Current Instruction Format (Before)
+
+```plaintext
+### Instruction:
+You are an AI assistant specializing in structuring and organizing data into hierarchical formats...
+
+Step 1: Understand the balance sheet...
+Step 2: Establish a perfect tree...
+...
+```
+
+This structure is already strong but can benefit from more **explicit procedural clarity**.
+
+---
+
+## 🔁 Proposed: Algorithmic Instruction Format
+
+```markdown
+### 🔧 Instruction Head: Symbolic Hierarchy Generation for Bulgarian Financial Assets
+
+You are an AI assistant specializing in structuring Bulgarian financial data into clean hierarchical trees. Follow these steps exactly:
+
+#### ✅ Step 1: Parse the Input
+- Input format: `ID | Label | Value1 | Value2`
+- Ignore the ID
+
+#### ✅ Step 2: Identify Hierarchy Layers
+- Detect categories like А., Б., В.
+- Recognize nested structures like Roman numerals or financial subcategories
+
+#### ✅ Step 3: Preserve and Format Values
+- Keep floats as-is (e.g., `282.75` → `282.75`)
+- Keep `NA` unchanged
+
+#### ✅ Step 4: Construct the Tree
+- Use symbolic formatting:
+  - `├──` for siblings
+  - `└──` for last sibling
+  - `│` for vertical alignment
+
+#### ✅ Step 5: Do Not Hallucinate
+- Only include categories from the input
+- Do not generate missing or artificial nodes
+
+#### ✅ Step 6: Cross-Verify Output
+- Ensure all input labels are present
+- Tree should visually and semantically align with financial logic
+```
+
+---
+
+## 📤 Example Output
+
+```plaintext
+Активи (NA)
+├── А. Записан, но невнесен капитал (5001.17 | 1240.95)
+├── Б. Нетекущи (дълготрайни) активи (9981.44 | 5417.92)
+│   ├── Нематериални активи (3748.61 | 6371.56)
+│   ├── Дълготрайни материални активи (3502.83 | 4485.8)
+│   ├── Дългосрочни финансови активи (7933.24 | 4934.32)
+│   ├── Отсрочени данъци (1359.5 | 6327.22)
+├── В. Текущи (краткотрайни) активи (2286.89 | 8583.47)
+│   ├── Материални запаси (3681.95 | 6034.81)
+│   ├── Вземания (3248.36 | 7456.5)
+│   ├── Инвестиции (7350.47 | 6362.39)
+│   ├── Парични средства (8590.09 | 3104.08)
+├── Г. Разходи за бъдещи периоди (2152.24 | 1409.19)
+│   ├── Разходи за наеми (2226.31 | 4015.26)
+│   ├── Разходи за застраховки (3411.25 | 3739.61)
+```
+
+---
+
+## 🚀 Next Steps
+- Expand with edge case examples (NA-only rows, float rounding errors)
+- Add negative examples (e.g., bad trees with hallucinated values)
+- Consider formal fine-tuning with SFT dataset (1000+ examples)
+- Merge this `.md` into your GitHub repo under `rag-pipeline/instructions/`
+
